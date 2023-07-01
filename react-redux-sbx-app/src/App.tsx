@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ReduxBasic from './Components/reduxBasic';
+import ReduxToolkitBasic from './Components/reduxToolkitBasic';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <ReduxBasic/>
+        <ReduxToolkitBasic/>
       </header>
     </div>
   );
