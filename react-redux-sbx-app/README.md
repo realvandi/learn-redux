@@ -1,3 +1,15 @@
+# Steps taken to initialization of this Application
+1. Create react app using
+```
+npx create-react-app cra-typescript-example --template typescript
+```
+2. Install redux packages using
+```
+npm install @reduxjs/toolkit
+npm install redux
+npm install react-redux
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
