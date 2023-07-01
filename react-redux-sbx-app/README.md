@@ -1,4 +1,4 @@
-# Steps taken to initialization of this Application
+# Steps taken for the initialization of this application
 1. Create react app using
 ```
 npx create-react-app cra-typescript-example --template typescript
