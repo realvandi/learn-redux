@@ -8,7 +8,7 @@ import counterReducer, {
   incrementAsync,
 } from "./counterSlice";
 import { useSelector, useDispatch } from "react-redux";
-import store, { RootState } from "./counterSliceStore";
+import { RootState } from "./counterSliceStore";
 
 function CounterSliceApp() {
   const dispatch = useDispatch();

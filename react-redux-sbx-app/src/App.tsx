@@ -1,7 +1,10 @@
 import { Provider } from "react-redux";
 import "./App.css";
 import CounterSliceApp from "./Components/Counter/counterSliceApp";
-import store from "./Components/Counter/counterSliceStore";
+import counterSliceStore from "./Components/Counter/counterSliceStore";
+
+/* ------------ Change in order to change the app provider store ------------ */
+const store = counterSliceStore;
 
 function App() {
   return (
