@@ -22,6 +22,6 @@ export function simulateHttpRequest(action: ArticleAction) {
   return (dispatch: DispatchType) => {
     setTimeout(() => {
       dispatch(action);
-    }, 100);
+    }, 1000);
   };
 }
