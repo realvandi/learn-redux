@@ -26,7 +26,7 @@ export const ArticleApp: React.FC = () => {
     )
   
     return (
-      <main>
+      <main className="p-4">
         <h1>My Articles</h1>
         <AddArticle saveArticle={saveArticle} />
         {articles.map((article: IArticle) => (
