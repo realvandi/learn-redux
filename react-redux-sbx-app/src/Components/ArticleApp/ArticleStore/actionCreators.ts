@@ -7,7 +7,7 @@ export function addArticle(article: IArticle) {
     article,
   };
 
-  return simulateHttpRequest(action);
+  return simulateHttpRequest(action, 500);
 }
 
 export function removeArticle(article: IArticle) {
@@ -15,13 +15,13 @@ export function removeArticle(article: IArticle) {
     type: actionTypes.REMOVE_ARTICLE,
     article,
   };
-  return simulateHttpRequest(action);
+  return simulateHttpRequest(action, 1000);
 }
 
-export function simulateHttpRequest(action: ArticleAction) {
+export function simulateHttpRequest(action: ArticleAction, delay: number = 500) {
   return (dispatch: DispatchType) => {
     setTimeout(() => {
       dispatch(action);
-    }, 1000);
+    }, delay);
   };
 }
