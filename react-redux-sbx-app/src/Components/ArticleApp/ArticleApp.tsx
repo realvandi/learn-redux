@@ -9,6 +9,10 @@ import { Article } from './ArticleComponents/Article';
 import { ArticleState, IArticle } from './ArticleType';
 import { configureStore } from '@reduxjs/toolkit';
 
+/* ----------------------------- NextUI Imports ----------------------------- */
+import { Text } from "@nextui-org/react";
+import { Spacer } from '@nextui-org/react';
+
 export const articleAppStore = createStore(articleReducer, applyMiddleware(thunk))
 export const articleAppStoreWithToolkit = configureStore({reducer: articleReducer})
 
@@ -26,9 +30,12 @@ export const ArticleApp: React.FC = () => {
     )
   
     return (
-      <main className="p-4 bg-gray-200">
-        <h1>Articles</h1>
+      <main className="p-3">
+        <Text h1
+        weight="bold">Articles</Text>
         <AddArticle saveArticle={saveArticle} />
+        <Spacer y={1}/>
+        <div className='w-1/2 grid grid-cols-2 gap-2'>
         {articles.map((article: IArticle) => (
           <Article
             key={article.id}
@@ -36,6 +43,7 @@ export const ArticleApp: React.FC = () => {
             removeArticle={removeArticle}
           />
         ))}
+        </div>
       </main>
     )
   }
