@@ -1,6 +1,9 @@
 import * as React from "react"
 import { IArticle } from "../ArticleType"
 
+/* ----------------------------- NextJS Imports ----------------------------- */
+import { Button } from '@nextui-org/react';
+
 type AddArticleProps = {
   saveArticle: (article: IArticle | any) => void
 }
@@ -16,7 +19,6 @@ export const AddArticle: React.FC<AddArticleProps> = ({ saveArticle }) => {
   }
 
   const addNewArticle = (e: React.FormEvent) => {
-    e.preventDefault()
     saveArticle(article)
   }
 
@@ -34,9 +36,9 @@ export const AddArticle: React.FC<AddArticleProps> = ({ saveArticle }) => {
         placeholder="Description"
         onChange={handleArticleData}
       />
-      <button disabled={article === undefined ? true : false}>
+      <Button onClick={addNewArticle} disabled={article === undefined ? true : false}>
         Add article
-      </button>
+      </Button>
     </form>
   )
 }
