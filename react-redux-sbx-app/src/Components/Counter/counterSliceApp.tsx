@@ -1,47 +1,31 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+import React from "react";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
 import counterReducer, {
   increment,
   decrement,
   incrementByAmount,
-  selectCount,
-} from './counterSlice';
-import { useSelector, useDispatch } from 'react-redux';
-
-const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
-});
-
-function Counter() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
-
-  return (
-    <div>
-      <button aria-label="Increment value" onClick={() => dispatch(increment())}>
-        Increment
-      </button>
-      <button aria-label="Decrement value" onClick={() => dispatch(decrement())}>
-        Decrement
-      </button>
-      <button
-        onClick={() => dispatch(incrementByAmount(5))}
-      >
-        Increment by 5
-      </button>
-      <span>{count}</span>
-    </div>
-  );
-}
+  incrementAsync,
+} from "./counterSlice";
+import { useSelector, useDispatch } from "react-redux";
+import store, { RootState } from "./counterSliceStore";
 
 function CounterSliceApp() {
+  const dispatch = useDispatch();
+  const count = useSelector((state: RootState) => state.counter);
+
   return (
-    <Provider store={store}>
-      <Counter />
-    </Provider>
+      <div>
+        <button onClick={() => dispatch(increment())}>Increment</button>
+        <button onClick={() => dispatch(decrement())}>Decrement</button>
+        <button onClick={() => dispatch(incrementByAmount(5))}>
+          Increment by 5
+        </button>
+        <button onClick={() => dispatch(incrementAsync(5))}>
+          Increment Async by 5
+        </button>
+        <p>{count}</p>
+      </div>
   );
 }
 
