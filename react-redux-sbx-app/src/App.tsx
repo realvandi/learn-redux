@@ -1,17 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ReduxBasic from './Components/reduxBasic';
-import ReduxToolkitBasic from './Components/reduxToolkitBasic';
+import { Provider } from "react-redux";
+import "./App.css";
+import CounterSliceApp from "./Components/Counter/counterSliceApp";
+import counterSliceStore from "./Components/Counter/counterSliceStore";
+
+/* ------------ Change in order to change the app provider store ------------ */
+const store = counterSliceStore;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <ReduxBasic/>
-        <ReduxToolkitBasic/>
-      </header>
+    <div className="App-header">
+      <Provider store={store}>
+        <CounterSliceApp />
+      </Provider>
     </div>
   );
 }
