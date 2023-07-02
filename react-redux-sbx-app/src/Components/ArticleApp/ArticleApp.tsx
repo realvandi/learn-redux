@@ -7,8 +7,10 @@ import { addArticle, removeArticle } from './ArticleStore/actionCreators';
 import { AddArticle } from './ArticleComponents/AddArticle';
 import { Article } from './ArticleComponents/Article';
 import { ArticleState, IArticle } from './ArticleType';
+import { configureStore } from '@reduxjs/toolkit';
 
 export const articleAppStore = createStore(articleReducer, applyMiddleware(thunk))
+export const articleAppStoreWithToolkit = configureStore({reducer: articleReducer})
 
 export const ArticleApp: React.FC = () => {
     const articles: readonly IArticle[] = useSelector(
