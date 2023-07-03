@@ -32,7 +32,7 @@ export const ArticleApp: React.FC = () => {
     return (
       <main className="p-3">
         <Text h1
-        weight="bold">Articles</Text>
+        weight="bold">Articles 🌟</Text>
         <AddArticle saveArticle={saveArticle} />
         <Spacer y={1}/>
         <div className='w-1/2 grid grid-cols-2 gap-2'>
