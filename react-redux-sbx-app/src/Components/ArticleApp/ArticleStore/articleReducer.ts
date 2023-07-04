@@ -4,13 +4,13 @@ import * as actionTypes from "./actionTypes"
 const initialState: ArticleState = {
   articles: [
     {
-      id: 1,
+      id: 0.12412322,
       title: "post 1",
       body:
         "Quisque cursus, metus vitae pharetra Nam libero tempore, cum soluta nobis est eligendi",
     },
     {
-      id: 2,
+      id: 0.9827364,
       title: "post 2",
       body:
         "Harum quidem rerum facilis est et expedita distinctio quas molestias excepturi sint",
