@@ -23,16 +23,6 @@ export const Article: React.FC<Props> = ({
 
   const dispatch: Dispatch<any> = useDispatch();
 
-  const deleteArticle = React.useCallback(
-    (article: IArticle) => dispatch(removeArticle(article)),
-    [dispatch, removeArticle]
-  );
-
-  const editArt = React.useCallback(
-    (article: IArticle) => dispatch(editArticle(article)),
-    [dispatch, editArticle]
-  );
-
   const handleArticleChange =
     (type: string, e: React.ChangeEvent<HTMLTextAreaElement>) => {
       switch (type) {
@@ -78,11 +68,11 @@ export const Article: React.FC<Props> = ({
           </Text>
         </Card.Body>
         <div className="m-3 flex flex-row gap-3">
-          <Button onClick={() => deleteArticle(editedArticle)} color={"error"}>
+          <Button onClick={() => dispatch(removeArticle(editedArticle))} color={"error"}>
             Delete
           </Button>
           {editing ? (
-            <Button onClick={() => {setEditing(false); editArt(editedArticle);}}>Save</Button>
+            <Button onClick={() => {setEditing(false); dispatch(editArticle(editedArticle));}}>Save</Button>
           ) : (
             <Button onClick={() => setEditing(true)}>Edit</Button>
           )}
