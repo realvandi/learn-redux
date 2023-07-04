@@ -3,7 +3,7 @@ import articleReducer from './ArticleStore/articleReducer';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from "redux-thunk";
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { addArticle, removeArticle } from './ArticleStore/actionCreators';
+import { addArticle, editArticle, removeArticle } from './ArticleStore/actionCreators';
 import { AddArticle } from './ArticleComponents/AddArticle';
 import { Article } from './ArticleComponents/Article';
 import { ArticleState, IArticle } from './ArticleType';
@@ -41,6 +41,7 @@ export const ArticleApp: React.FC = () => {
             key={article.id}
             article={article}
             removeArticle={removeArticle}
+            editArticle={editArticle}
           />
         ))}
         </div>

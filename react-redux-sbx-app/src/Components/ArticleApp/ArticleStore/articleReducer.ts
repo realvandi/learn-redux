@@ -42,6 +42,20 @@ const articleReducer = (
           ...state,
           articles: updatedArticles,
         }
+      case actionTypes.EDIT_ARTICLE:
+        const editedArticleExcluded: IArticle[] = state.articles.filter(
+          article => article.id !== action.article.id
+        )
+        return {
+          ...state,
+          articles: [
+            ...editedArticleExcluded,{
+              id: action.article.id,
+              title: action.article.title,
+              body: action.article.body
+            }
+          ]
+        }
     }
     return state
   }

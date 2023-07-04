@@ -18,6 +18,14 @@ export function removeArticle(article: IArticle) {
   return simulateHttpRequest(action, 1000);
 }
 
+export function editArticle(article: IArticle) {
+  const action: ArticleAction = {
+    type: actionTypes.EDIT_ARTICLE,
+    article
+  };
+  return simulateHttpRequest(action, 0);
+}
+
 export function simulateHttpRequest(action: ArticleAction, delay: number = 500) {
   return (dispatch: DispatchType) => {
     setTimeout(() => {
