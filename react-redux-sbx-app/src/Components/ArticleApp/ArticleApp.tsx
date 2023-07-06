@@ -7,14 +7,22 @@ import { addArticle, editArticle, removeArticle } from './ArticleStore/actionCre
 import { AddArticle } from './ArticleComponents/AddArticle';
 import { Article } from './ArticleComponents/Article';
 import { ArticleState, IArticle } from './ArticleType';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import appReducer from './AppStore/appReducer';
 
 /* ----------------------------- NextUI Imports ----------------------------- */
 import { Text } from "@nextui-org/react";
 import { Spacer } from '@nextui-org/react';
+import { AppState, IAppState } from './AppType';
 
-export const articleAppStore = createStore(articleReducer, applyMiddleware(thunk))
-export const articleAppStoreWithToolkit = configureStore({reducer: articleReducer})
+const rootReducer = combineReducers({
+  article: articleReducer,
+  // mainApp: appReducer,
+  // other reducers...
+});
+
+// export const articleAppStore = createStore(rootReducer, applyMiddleware(thunk))
+export const articleAppStoreWithToolkit = configureStore({reducer: rootReducer})
 
 export const ArticleApp: React.FC = () => {
     const articles: readonly IArticle[] = useSelector(
@@ -22,6 +30,11 @@ export const ArticleApp: React.FC = () => {
       shallowEqual
     )
   
+    // const appState: IAppState = useSelector(
+    //   (state: AppState) => state.state,
+    //   shallowEqual
+    // )
+
     const dispatch: React.Dispatch<any> = useDispatch()
   
     const saveArticle = React.useCallback(
@@ -31,6 +44,10 @@ export const ArticleApp: React.FC = () => {
   
     return (
       <main className="p-3">
+        {/* {
+          appState.loadState.status === 'loading' ?
+          <Text>Loading</Text> : null
+        } */}
         <Text h1
         weight="bold">Articles 🌟</Text>
         <AddArticle saveArticle={saveArticle} />

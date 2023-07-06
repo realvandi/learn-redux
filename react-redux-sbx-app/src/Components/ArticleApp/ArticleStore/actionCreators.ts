@@ -1,3 +1,4 @@
+import { articleAddSuccess, setLoading } from "../AppStore/appActionCreators";
 import { ArticleAction, DispatchType, IArticle } from "../ArticleType";
 import * as actionTypes from "./actionTypes";
 
@@ -27,9 +28,11 @@ export function editArticle(article: IArticle) {
 }
 
 export function simulateHttpRequest(action: ArticleAction, delay: number = 500) {
+  setLoading();
   return (dispatch: DispatchType) => {
     setTimeout(() => {
       dispatch(action);
+      articleAddSuccess();
     }, delay);
   };
 }
