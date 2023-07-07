@@ -1,17 +1,16 @@
 import { Provider } from "react-redux";
 import "./App.css";
-import CounterSliceApp from "./Components/CounterApp/counterSliceApp";
-import counterSliceStore from "./Components/CounterApp/counterSliceStore";
+import CounterSliceApp from "./Components/Snippet_CounterApp/counterSliceApp";
+import counterSliceStore from "./Components/Snippet_CounterApp/counterSliceStore";
 import { NextUIProvider } from '@nextui-org/react';
 
 import {
   ArticleApp,
   articleAppStore,
-  articleAppStoreWithToolkit,
 } from "./Components/ArticleApp/ArticleApp";
 
 /* ------------ Change in order to change the app provider store ------------ */
-const store = articleAppStoreWithToolkit;
+const store = articleAppStore;
 
 function App() {
   return (

@@ -1,49 +1,47 @@
-import { ArticleAction, ArticleState, IArticle } from "../ArticleType"
-import * as actionTypes from "./actionTypes"
+import { createSlice } from "@reduxjs/toolkit";
+import { IArticle } from "../ArticleType";
 
-const initialState: ArticleState = {
-  articles: [
-    {
-      id: 1,
-      title: "post 1",
-      body:
-        "Quisque cursus, metus vitae pharetra Nam libero tempore, cum soluta nobis est eligendi",
-    },
-    {
-      id: 2,
-      title: "post 2",
-      body:
-        "Harum quidem rerum facilis est et expedita distinctio quas molestias excepturi sint",
-    },
-  ],
-}
+const initialState: IArticle[] = [
+  {
+    id: 1,
+    title: "Hello World",
+    body: "A great way to start coding",
+  },
+  {
+    id: 2,
+    title: "Goodbye World",
+    body: "When you give up coding",
+  },
+];
 
-//Set the initial state here
-const articleReducer = (
-    state: ArticleState = initialState,
-    action: ArticleAction
-  ): ArticleState => {
-    switch (action.type) {
-      case actionTypes.ADD_ARTICLE:
-        const newArticle: IArticle = {
-          id: Math.random(), // not really unique
-          title: action.article.title,
-          body: action.article.body,
-        }
-        return {
-          ...state,
-          articles: state.articles.concat(newArticle),
-        }
-      case actionTypes.REMOVE_ARTICLE:
-        const updatedArticles: IArticle[] = state.articles.filter(
-          article => article.id !== action.article.id
-        )
-        return {
-          ...state,
-          articles: updatedArticles,
-        }
-    }
-    return state
-  }
-  
-  export default articleReducer
+const articleSlice = createSlice({
+  name: "articles",
+  initialState: initialState,
+  reducers: {
+    addArticle(state, action) {
+      state.push({
+        id: Math.random(),
+        title: action.payload.title,
+        body: action.payload.body
+      });
+    },
+    deleteArticle(state, action) {
+      const articleId = action.payload.id;
+      const index = state.findIndex((article) => article.id === articleId);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+    },
+    editArticle(state, action) {
+      const { id, title, body } = action.payload;
+      const article = state.find((article) => article.id === id);
+      if (article) {
+        article.title = title;
+        article.body = body;
+      }
+    },
+  },
+});
+
+export const { addArticle, deleteArticle, editArticle } = articleSlice.actions;
+export default articleSlice.reducer;

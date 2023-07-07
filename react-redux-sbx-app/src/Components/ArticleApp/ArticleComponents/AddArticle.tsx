@@ -3,6 +3,8 @@ import { IArticle } from "../ArticleType";
 
 /* ----------------------------- NextJS Imports ----------------------------- */
 import { Button, Textarea } from "@nextui-org/react";
+import { useDispatch } from "react-redux";
+import { addArticle } from "../ArticleStore/ArticleReducer";
 
 type AddArticleProps = {
   saveArticle: (article: IArticle | any) => void;
@@ -10,6 +12,7 @@ type AddArticleProps = {
 
 export const AddArticle: React.FC<AddArticleProps> = ({ saveArticle }) => {
   const [article, setArticle] = React.useState<IArticle | {}>();
+  const dispatch = useDispatch();
 
   const handleArticleData = (e: any) => {
     setArticle({
@@ -19,7 +22,7 @@ export const AddArticle: React.FC<AddArticleProps> = ({ saveArticle }) => {
   };
 
   const addNewArticle = (e: React.FormEvent) => {
-    saveArticle(article);
+    dispatch(addArticle(article));
   };
 
   return (
