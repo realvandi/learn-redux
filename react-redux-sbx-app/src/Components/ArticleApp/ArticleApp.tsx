@@ -46,7 +46,6 @@ export const ArticleApp: React.FC = () => {
             key={article.id}
             article={article}
             removeArticle={deleteArticle}
-            // editArticle={editArticle}
           />
         ))}
       </div>

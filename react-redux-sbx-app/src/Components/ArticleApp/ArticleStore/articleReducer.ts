@@ -19,7 +19,11 @@ const articleSlice = createSlice({
   initialState: initialState,
   reducers: {
     addArticle(state, action) {
-      state.push(action.payload);
+      state.push({
+        id: Math.random(),
+        title: action.payload.title,
+        body: action.payload.body
+      });
     },
     deleteArticle(state, action) {
       const articleId = action.payload.id;
