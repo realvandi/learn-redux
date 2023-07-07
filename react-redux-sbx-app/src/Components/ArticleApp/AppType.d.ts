@@ -4,15 +4,12 @@ export type AppLoadState = {
 
 export interface IAppState {
     loadState: AppLoadState;
-}
-
-export type AppState = {
-    state: IAppState;
+    id: string;
 }
 
 export type AppAction = {
     type: string;
-    appState: AppState;
+    appState: IAppState;
 }
 
 export type AppDispatchType = (args: AppAction) => AppAction;

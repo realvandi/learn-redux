@@ -8,9 +8,9 @@ export type ArticleState = {
   articles: IArticle[];
 };
 
-export type ArticleAction = {
-  type: string;
-  article: IArticle;
-};
+// export type ArticleAction = {
+//   type: string;
+//   article: IArticle;
+// };
 
-type DispatchType = (args: ArticleAction) => ArticleAction;
+// type DispatchType = (args: ArticleAction) => ArticleAction;

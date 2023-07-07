@@ -1,27 +1,28 @@
 import * as React from "react";
-import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { IArticle } from "../ArticleType";
+import { deleteArticle, editArticle } from "../ArticleStore/ArticleReducer";
 
 /* ----------------------------- NextUI Imports ----------------------------- */
 import { Card, Text, Button, Textarea } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
 
+
 type Props = {
   article: IArticle;
   removeArticle: (article: IArticle) => void;
-  editArticle: (article: IArticle) => void;
+  // editArticle: (article: IArticle) => void;
 };
 
 export const Article: React.FC<Props> = ({
   article,
   removeArticle,
-  editArticle,
+  // editArticle,
 }) => {
   const [editing, setEditing] = useState(false);
   const [editedArticle, setEditedArticle] = useState<IArticle>(article);
 
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
 
   const handleArticleChange =
     (type: string, e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -68,11 +69,11 @@ export const Article: React.FC<Props> = ({
         </Card.Body>
         <Card.Footer>
         <div className="p-3 m-0 w-full rounded-md flex flex-col gap-2">
-          <Button onClick={() => dispatch(removeArticle(editedArticle))} color={"error"}>
+          <Button onClick={() => dispatch(deleteArticle(editedArticle))} color={"error"}>
             Delete
           </Button>
           {editing ? (
-            <Button onClick={() => {setEditing(false); dispatch(editArticle(editedArticle));}}>Save</Button>
+            <Button onClick={() => {setEditing(false); dispatch(editArticle(editedArticle))}}>Save</Button>
           ) : (
             <Button onClick={() => setEditing(true)}>Edit</Button>
           )}

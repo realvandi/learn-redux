@@ -1,2 +1,0 @@
-export const SET_LOADING = "SET_LOADING";
-export const ARTICLE_ADD_SUCCESS = "ARTICLE_ADD_SUCCESS";
