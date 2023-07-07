@@ -1,7 +1,7 @@
 import * as React from "react";
 
 /* ------------------------------ Redux Imports ----------------------------- */
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { shallowEqual, useSelector } from "react-redux";
 
 /* ----------------------------- NextUI Imports ----------------------------- */
@@ -12,9 +12,17 @@ import { Spacer } from "@nextui-org/react";
 import { addArticle, deleteArticle, editArticle } from "./ArticleStore/ArticleReducer";
 import articleReducer from "./ArticleStore/ArticleReducer";
 
+/* --------------------------- Middleware Imports --------------------------- */
+import { loggingMiddleware } from "./CustomMiddlewares/loggingMiddleware";
+
 import { AddArticle } from "./ArticleComponents/AddArticle";
 import { Article } from "./ArticleComponents/Article";
 import { IArticle } from "./ArticleType";
+
+/* -------------------------------------------------------------------------- */
+/*                                    Body                                    */
+/* -------------------------------------------------------------------------- */
+const middleware = [...getDefaultMiddleware(), loggingMiddleware];
 
 const rootReducer = combineReducers({
   articles: articleReducer,
@@ -24,6 +32,7 @@ const rootReducer = combineReducers({
 
 export const articleAppStore = configureStore({
   reducer: rootReducer,
+  middleware: middleware
 });
 
 export const ArticleApp: React.FC = () => {
