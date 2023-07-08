@@ -2,7 +2,6 @@ import { Provider } from "react-redux";
 import "./App.css";
 import CounterSliceApp from "./Components/Snippet_CounterApp/counterSliceApp";
 import counterSliceStore from "./Components/Snippet_CounterApp/counterSliceStore";
-import { NextUIProvider } from '@nextui-org/react';
 
 import {
   ArticleApp,
@@ -15,9 +14,7 @@ const store = articleAppStore;
 function App() {
   return (
     <Provider store={store}>
-      <NextUIProvider>
         <ArticleApp />
-      </NextUIProvider>
     </Provider>
   );
 }

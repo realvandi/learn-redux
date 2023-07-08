@@ -5,7 +5,7 @@ import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 /* ----------------------------- NextUI Imports ----------------------------- */
-import { Switch, Text } from "@nextui-org/react";
+import { NextUIProvider, Switch, Text, createTheme } from "@nextui-org/react";
 import { Spacer } from "@nextui-org/react";
 
 /* ------------------------------ Icon Imports ------------------------------ */
@@ -22,6 +22,21 @@ import { AddArticle } from "./ArticleComponents/AddArticle";
 import { Article } from "./ArticleComponents/Article";
 import { IArticle } from "./ArticleType";
 import AppReducer, { AppState, setViewMode } from "./ArticleStore/AppReducer";
+
+/* -------------------------------------------------------------------------- */
+/*                            Dark and Light Themes                           */
+/* -------------------------------------------------------------------------- */
+const lightTheme = createTheme({
+  type: 'light',
+  theme: {
+  }
+})
+
+const darkTheme = createTheme({
+  type: 'dark',
+  theme: {
+  }
+})
 
 /* -------------------------------------------------------------------------- */
 /*                                    Body                                    */
@@ -54,6 +69,7 @@ export const ArticleApp: React.FC = () => {
   )
 
   return (
+    <NextUIProvider theme={appState.viewMode==="light" ? lightTheme : appState.viewMode==="dark" ? darkTheme : lightTheme}>
     <main className="p-3">
       <Switch
           checked={true}
@@ -77,5 +93,6 @@ export const ArticleApp: React.FC = () => {
         ))}
       </div>
     </main>
+    </NextUIProvider>
   );
 };
