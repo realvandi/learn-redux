@@ -47,6 +47,7 @@ export const Article: React.FC<Props> = ({
   return (
     <div className="">
       <Card isHoverable>
+
         <Card.Header className="relative">
           {editing ? (
             <Textarea underlined rows={1} initialValue={editedArticle.title} style={{fontSize: '30px', fontWeight: 'bold'}} onChange={(e) => handleArticleChange("title", e as React.ChangeEvent<HTMLTextAreaElement>)}/>

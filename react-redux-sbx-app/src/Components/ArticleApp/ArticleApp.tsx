@@ -29,12 +29,18 @@ import AppReducer, { AppState, setViewMode } from "./ArticleStore/AppReducer";
 const lightTheme = createTheme({
   type: 'light',
   theme: {
+    colors:{
+      background: 'linear-gradient(to bottom, #FFFFFF, #F2F2F2)'
+    }
   }
 })
 
 const darkTheme = createTheme({
   type: 'dark',
   theme: {
+    colors:{
+      background: 'linear-gradient(to bottom, #000000, #333333)'
+    }
   }
 })
 
@@ -76,7 +82,7 @@ export const ArticleApp: React.FC = () => {
           size="xl"
           iconOn={<FaSun />}
           iconOff={<FaRegMoon />}
-          onChange={(e)=>{dispatch(setViewMode(e.target.checked)); console.log(e.target.checked)}}
+          onChange={(e)=>{dispatch(setViewMode(e.target.checked));}}
         />
       <Text h1 weight="bold">
         Articles 🌟

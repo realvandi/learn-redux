@@ -5,7 +5,7 @@ export const loggingMiddleware = (store: any) => (next: any) => (action: any) =>
     const result = next(action);
   
     console.log('Next State:', store.getState());
-    console.log('🚀---');
+    console.log('======🚀======');
   
     return result;
   };
