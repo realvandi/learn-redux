@@ -5,13 +5,15 @@ export type LoadStatuses = "idle" | "loading" ;
 export type AppState = {
     id: number,
     viewMode: ViewModes,
-    loadStatus: LoadStatuses
+    loadStatus: LoadStatuses,
+    simulateHttp: boolean,
 }
 
 const initialState: AppState = {
     id: 1,
     viewMode: "light",
-    loadStatus: "idle"
+    loadStatus: "idle",
+    simulateHttp: false,
 }
 
 const appSlice = createSlice({
@@ -27,9 +29,12 @@ const appSlice = createSlice({
         },
         setLoadStatus(state, action: PayloadAction<{ loadStatus: LoadStatuses }>) {
             state.loadStatus = action.payload.loadStatus
+        },
+        setSimulateHttpRequest(state, action: PayloadAction<boolean>) {
+            state.simulateHttp = action.payload
         }
     }
 })
 
-export const {setViewMode, setLoadStatus} = appSlice.actions
+export const {setViewMode, setLoadStatus, setSimulateHttpRequest} = appSlice.actions
 export default appSlice.reducer;

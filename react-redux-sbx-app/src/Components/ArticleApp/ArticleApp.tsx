@@ -21,7 +21,7 @@ import { loggingMiddleware } from "./CustomMiddlewares/loggingMiddleware";
 import { AddArticle } from "./ArticleComponents/AddArticle";
 import { Article } from "./ArticleComponents/Article";
 import { IArticle } from "./ArticleType";
-import AppReducer, { AppState, setViewMode } from "./ArticleStore/AppReducer";
+import AppReducer, { AppState, setSimulateHttpRequest, setViewMode } from "./ArticleStore/AppReducer";
 
 /* -------------------------------------------------------------------------- */
 /*                            Dark and Light Themes                           */
@@ -29,18 +29,12 @@ import AppReducer, { AppState, setViewMode } from "./ArticleStore/AppReducer";
 const lightTheme = createTheme({
   type: 'light',
   theme: {
-    colors:{
-      background: 'linear-gradient(to bottom, #FFFFFF, #F2F2F2)'
-    }
   }
 })
 
 const darkTheme = createTheme({
   type: 'dark',
   theme: {
-    colors:{
-      background: 'linear-gradient(to bottom, #000000, #333333)'
-    }
   }
 })
 
@@ -77,6 +71,10 @@ export const ArticleApp: React.FC = () => {
   return (
     <NextUIProvider theme={appState.viewMode==="light" ? lightTheme : appState.viewMode==="dark" ? darkTheme : lightTheme}>
     <main className="p-3">
+    <div className="flex flex-row gap-3 items-center">
+    <Text>
+          Dark Mode
+        </Text>
       <Switch
           checked={true}
           size="xl"
@@ -84,6 +82,16 @@ export const ArticleApp: React.FC = () => {
           iconOff={<FaRegMoon />}
           onChange={(e)=>{dispatch(setViewMode(e.target.checked));}}
         />
+        </div>
+        <div className="flex flex-row gap-3 items-center">
+        <Text>
+          Simulate HTTP Request
+        </Text>
+        <Switch
+        checked={false}
+        size="xl"
+        onChange={(e)=>{dispatch(setSimulateHttpRequest(e.target.checked))}}/>
+        </div>
       <Text h1 weight="bold">
         Articles 🌟
       </Text>
