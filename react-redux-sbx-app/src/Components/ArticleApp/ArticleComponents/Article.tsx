@@ -47,14 +47,12 @@ export const Article: React.FC<Props> = ({
   return (
     <div className="">
       <Card isHoverable>
-
         <Card.Header className="relative">
           {editing ? (
             <Textarea underlined rows={1} initialValue={editedArticle.title} style={{fontSize: '30px', fontWeight: 'bold'}} onChange={(e) => handleArticleChange("title", e as React.ChangeEvent<HTMLTextAreaElement>)}/>
           ) : (
             <Text h2>{editedArticle.title}</Text>
           )}
-          <Text className="absolute right-3">{editedArticle.id}</Text>
         </Card.Header>
         <Card.Divider />
         <Card.Body>
@@ -69,14 +67,14 @@ export const Article: React.FC<Props> = ({
             )}
         </Card.Body>
         <Card.Footer>
-        <div className="p-3 m-0 w-full rounded-md flex flex-col gap-2">
-          <Button onClick={() => dispatch(deleteArticle(editedArticle))} color={"error"}>
+        <div className="w-full flex flex-col gap-2">
+          <Button onClick={() => dispatch(deleteArticle(editedArticle))} color={"error"} size={"sm"}>
             Delete
           </Button>
           {editing ? (
-            <Button onClick={() => {setEditing(false); dispatch(editArticle(editedArticle))}}>Save</Button>
+            <Button onClick={() => {setEditing(false); dispatch(editArticle(editedArticle))}} size={"sm"}>Save</Button>
           ) : (
-            <Button onClick={() => setEditing(true)}>Edit</Button>
+            <Button onClick={() => setEditing(true)} size={"sm"}>Edit</Button>
           )}
         </div>
         </Card.Footer>

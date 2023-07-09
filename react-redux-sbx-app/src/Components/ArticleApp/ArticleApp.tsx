@@ -89,7 +89,7 @@ export const ArticleApp: React.FC = () => {
       </Text>
       <AddArticle saveArticle={addArticle} />
       <Spacer y={1} />
-      <div className="flex flex-col gap-2">
+      <div className="grid grid-cols-2 gap-3">
         {articles.map((article: IArticle) => (
           <Article
             key={article.id}
