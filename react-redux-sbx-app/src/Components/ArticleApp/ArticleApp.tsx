@@ -98,6 +98,11 @@ export const ArticleApp: React.FC = () => {
           dispatch(uselessMachineGo());
         }}
         />
+        <div className="relative">
+        <Text h1 className={`absolute -translate-y-1/2 ${appState.loadStatus === "idle" ? "-translate-x-0" : "translate-x-1/2" } transition-all`} >
+          👈
+        </Text>
+        </div>
         {
           appState.loadStatus === "loading" ?
           <Loading />
