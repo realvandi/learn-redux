@@ -156,7 +156,7 @@ export const ArticleApp: React.FC = () => {
                 }`}
               >
                 {appState.loadStatus === "idle" ? "👈🤩" : "👈😠"}
-                <Text h6 className={`${appState.viewMode === "light" ? "bg-gray-200" : "bg-gray-700" } p-3 rounded-2xl -translate-x-2 -translate-y-1/2 shadow-md transition-all ease-in-out duration-500 opacity opacity-${appState.loadStatus === "loading" ? "100" : "0"}`}>No touching!</Text>
+                <Text h6 className={`${appState.viewMode === "light" ? "bg-gray-200" : "bg-gray-700" } p-3 rounded-2xl -translate-x-2 -translate-y-1/2 shadow-md transition-all ease-in-out duration-500 ${appState.loadStatus === "idle" ? " opacity-0 " : " opacity-100 "}`}>No touching!</Text>
               </Text>
             </div>
             <div className="absolute right-1/2 translate-x-1/2 top-4 flex flex-row">
