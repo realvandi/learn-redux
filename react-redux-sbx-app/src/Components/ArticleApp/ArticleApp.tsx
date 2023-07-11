@@ -1,8 +1,8 @@
 import * as React from "react";
 
 /* ------------------------------ Redux Imports ----------------------------- */
-import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { configureStore, combineReducers, getDefaultMiddleware, Dispatch } from "@reduxjs/toolkit";
+import { shallowEqual, useDispatch as useReduxDispatch, useSelector } from "react-redux";
 
 /* ----------------------------- NextUI Imports ----------------------------- */
 import { NextUIProvider, Switch, Text, createTheme } from "@nextui-org/react";
@@ -17,11 +17,12 @@ import articleReducer from "./ArticleStore/ArticleReducer";
 
 /* --------------------------- Middleware Imports --------------------------- */
 import { loggingMiddleware } from "./CustomMiddlewares/loggingMiddleware";
+import thunk from 'redux-thunk';
 
 import { AddArticle } from "./ArticleComponents/AddArticle";
 import { Article } from "./ArticleComponents/Article";
 import { IArticle } from "./ArticleType";
-import AppReducer, { AppState, setSimulateHttpRequest, setViewMode } from "./ArticleStore/AppReducer";
+import AppReducer, { AppState, disableSimulateHttpRequestWithDelay, setSimulateHttpRequest, setViewMode } from "./ArticleStore/AppReducer";
 
 /* -------------------------------------------------------------------------- */
 /*                            Dark and Light Themes                           */
@@ -41,7 +42,7 @@ const darkTheme = createTheme({
 /* -------------------------------------------------------------------------- */
 /*                                    Body                                    */
 /* -------------------------------------------------------------------------- */
-const middleware = [...getDefaultMiddleware(), loggingMiddleware];
+const middleware = [...getDefaultMiddleware(), loggingMiddleware, thunk];
 
 const rootReducer = combineReducers({
   articles: articleReducer,
@@ -56,7 +57,7 @@ export const articleAppStore = configureStore({
 
 export const ArticleApp: React.FC = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useReduxDispatch()
 
   const articles: readonly IArticle[] = useSelector(
     (state: any) => state.articles,
@@ -90,7 +91,11 @@ export const ArticleApp: React.FC = () => {
         <Switch
         checked={false}
         size="xl"
-        onChange={(e)=>{dispatch(setSimulateHttpRequest(e.target.checked))}}/>
+        onChange={(e) => {
+          dispatch(setSimulateHttpRequest(e.target.checked));
+          dispatch(disableSimulateHttpRequestWithDelay());
+        }}
+        />
         </div>
       <Text h1 weight="bold">
         Articles 🌟

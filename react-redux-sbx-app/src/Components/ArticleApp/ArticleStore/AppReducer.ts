@@ -1,4 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 export type ViewModes = "light" | "dark";
 export type LoadStatuses = "idle" | "loading" ;
@@ -33,8 +34,26 @@ const appSlice = createSlice({
         setSimulateHttpRequest(state, action: PayloadAction<boolean>) {
             state.simulateHttp = action.payload
         }
+    },
+    extraReducers(builder) {
+        builder.addCase(disableSimulateHttpRequestWithDelay.pending, (state, action)=>{
+            state.loadStatus = "loading"
+        })
+        builder.addCase(disableSimulateHttpRequestWithDelay.fulfilled, (state, action)=>{
+            state.loadStatus = "idle"
+            state.simulateHttp = false
+        })
+        builder.addCase(disableSimulateHttpRequestWithDelay.rejected, (state, action)=>{
+            alert("Resetting simulate Http Failed!")
+        })
     }
 })
+
+export const disableSimulateHttpRequestWithDelay = createAsyncThunk('app/disableSimulateHttpRequestWithDelay', async () => {
+    console.log("Disabling again..")
+    return new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 1500))
+})
+  
 
 export const {setViewMode, setLoadStatus, setSimulateHttpRequest} = appSlice.actions
 export default appSlice.reducer;
