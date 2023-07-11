@@ -7,14 +7,14 @@ export type AppState = {
     id: number,
     viewMode: ViewModes,
     loadStatus: LoadStatuses,
-    simulateHttp: boolean,
+    uselessMachine: boolean,
 }
 
 const initialState: AppState = {
     id: 1,
     viewMode: "light",
     loadStatus: "idle",
-    simulateHttp: false,
+    uselessMachine: false,
 }
 
 const appSlice = createSlice({
@@ -32,7 +32,7 @@ const appSlice = createSlice({
             state.loadStatus = action.payload.loadStatus
         },
         setUselessMachine(state, action: PayloadAction<boolean>) {
-            state.simulateHttp = action.payload
+            state.uselessMachine = action.payload
         }
     },
     extraReducers(builder) {
@@ -41,7 +41,7 @@ const appSlice = createSlice({
         })
         builder.addCase(uselessMachineGo.fulfilled, (state, action)=>{
             state.loadStatus = "idle"
-            state.simulateHttp = false
+            state.uselessMachine = false;
         })
         builder.addCase(uselessMachineGo.rejected, (state, action)=>{
             alert("Resetting simulate Http Failed!")
@@ -55,7 +55,7 @@ function delay(ms: number) {
 
 export const uselessMachineGo = createAsyncThunk('app/uselessMachineGo', async () => {
     console.log("Starting disabling..");
-    await delay(1200);
+    await delay(2000);
     console.log("Disabling..");
     return false;
 })
