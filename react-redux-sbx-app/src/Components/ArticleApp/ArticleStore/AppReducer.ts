@@ -1,5 +1,4 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 
 export type ViewModes = "light" | "dark";
 export type LoadStatuses = "idle" | "loading" ;
@@ -49,9 +48,15 @@ const appSlice = createSlice({
     }
 })
 
+function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 export const disableSimulateHttpRequestWithDelay = createAsyncThunk('app/disableSimulateHttpRequestWithDelay', async () => {
-    console.log("Disabling again..")
-    return new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 1500))
+    console.log("Starting disabling..");
+    await delay(2000);
+    console.log("Disabling..")
+    return false
 })
   
 

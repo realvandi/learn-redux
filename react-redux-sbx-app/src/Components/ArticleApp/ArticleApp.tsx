@@ -1,8 +1,8 @@
 import * as React from "react";
 
 /* ------------------------------ Redux Imports ----------------------------- */
-import { configureStore, combineReducers, getDefaultMiddleware, Dispatch } from "@reduxjs/toolkit";
-import { shallowEqual, useDispatch as useReduxDispatch, useSelector } from "react-redux";
+import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 /* ----------------------------- NextUI Imports ----------------------------- */
 import { NextUIProvider, Switch, Text, createTheme } from "@nextui-org/react";
@@ -55,9 +55,11 @@ export const articleAppStore = configureStore({
   middleware: middleware
 });
 
+export type AppDispatch = typeof articleAppStore.dispatch
+
 export const ArticleApp: React.FC = () => {
 
-  const dispatch = useReduxDispatch()
+  const dispatch = useDispatch<any>();
 
   const articles: readonly IArticle[] = useSelector(
     (state: any) => state.articles,
@@ -89,13 +91,18 @@ export const ArticleApp: React.FC = () => {
           Simulate HTTP Request
         </Text>
         <Switch
-        checked={false}
+        checked={appState.simulateHttp}
         size="xl"
         onChange={(e) => {
           dispatch(setSimulateHttpRequest(e.target.checked));
           dispatch(disableSimulateHttpRequestWithDelay());
         }}
         />
+        <Text>
+          {
+            appState.loadStatus
+          }
+        </Text>
         </div>
       <Text h1 weight="bold">
         Articles 🌟
