@@ -5,7 +5,7 @@ import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 /* ----------------------------- NextUI Imports ----------------------------- */
-import { NextUIProvider, Switch, Text, createTheme } from "@nextui-org/react";
+import { Avatar, Loading, NextUIProvider, Progress, Spinner, Switch, Text, createTheme } from "@nextui-org/react";
 import { Spacer } from "@nextui-org/react";
 
 /* ------------------------------ Icon Imports ------------------------------ */
@@ -22,7 +22,7 @@ import thunk from 'redux-thunk';
 import { AddArticle } from "./ArticleComponents/AddArticle";
 import { Article } from "./ArticleComponents/Article";
 import { IArticle } from "./ArticleType";
-import AppReducer, { AppState, disableSimulateHttpRequestWithDelay, setSimulateHttpRequest, setViewMode } from "./ArticleStore/AppReducer";
+import AppReducer, { AppState, uselessMachineGo, setUselessMachine, setViewMode } from "./ArticleStore/AppReducer";
 
 /* -------------------------------------------------------------------------- */
 /*                            Dark and Light Themes                           */
@@ -88,21 +88,21 @@ export const ArticleApp: React.FC = () => {
         </div>
         <div className="flex flex-row gap-3 items-center">
         <Text>
-          Simulate HTTP Request
+          Useless machine
         </Text>
         <Switch
         checked={appState.simulateHttp}
         size="xl"
         onChange={(e) => {
-          dispatch(setSimulateHttpRequest(e.target.checked));
-          dispatch(disableSimulateHttpRequestWithDelay());
+          dispatch(setUselessMachine(e.target.checked));
+          dispatch(uselessMachineGo());
         }}
         />
-        <Text>
-          {
-            appState.loadStatus
-          }
-        </Text>
+        {
+          appState.loadStatus === "loading" ?
+          <Loading />
+           : null
+        }
         </div>
       <Text h1 weight="bold">
         Articles 🌟

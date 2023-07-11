@@ -1,4 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
 export type ViewModes = "light" | "dark";
 export type LoadStatuses = "idle" | "loading" ;
@@ -30,19 +31,19 @@ const appSlice = createSlice({
         setLoadStatus(state, action: PayloadAction<{ loadStatus: LoadStatuses }>) {
             state.loadStatus = action.payload.loadStatus
         },
-        setSimulateHttpRequest(state, action: PayloadAction<boolean>) {
+        setUselessMachine(state, action: PayloadAction<boolean>) {
             state.simulateHttp = action.payload
         }
     },
     extraReducers(builder) {
-        builder.addCase(disableSimulateHttpRequestWithDelay.pending, (state, action)=>{
+        builder.addCase(uselessMachineGo.pending, (state, action)=>{
             state.loadStatus = "loading"
         })
-        builder.addCase(disableSimulateHttpRequestWithDelay.fulfilled, (state, action)=>{
+        builder.addCase(uselessMachineGo.fulfilled, (state, action)=>{
             state.loadStatus = "idle"
             state.simulateHttp = false
         })
-        builder.addCase(disableSimulateHttpRequestWithDelay.rejected, (state, action)=>{
+        builder.addCase(uselessMachineGo.rejected, (state, action)=>{
             alert("Resetting simulate Http Failed!")
         })
     }
@@ -52,13 +53,13 @@ function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-export const disableSimulateHttpRequestWithDelay = createAsyncThunk('app/disableSimulateHttpRequestWithDelay', async () => {
+export const uselessMachineGo = createAsyncThunk('app/uselessMachineGo', async () => {
     console.log("Starting disabling..");
-    await delay(2000);
-    console.log("Disabling..")
-    return false
+    await delay(1200);
+    console.log("Disabling..");
+    return false;
 })
   
 
-export const {setViewMode, setLoadStatus, setSimulateHttpRequest} = appSlice.actions
+export const {setViewMode, setLoadStatus, setUselessMachine} = appSlice.actions
 export default appSlice.reducer;
